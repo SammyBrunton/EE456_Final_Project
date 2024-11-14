@@ -32,7 +32,7 @@ struct sockaddr_in serv_addr;
  cout << "Connected to the server." << endl;
  
  // Part 4 : Send and Receive Data
- const char *hello = "Hello from client";
+ const char *hello = "Hello from Sammy";
  send(sock, hello, strlen(hello), 0);
  cout << "Hello message sent." << endl;
  char buffer[1024] = {0};
