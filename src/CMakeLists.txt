@@ -11,6 +11,7 @@ add_executable(lora_rx lora_rx.cpp)
 add_executable(lora_tx lora_tx.cpp)
 add_executable(fsk_tx fsk_tx.cpp)
 add_executable(fsk_rx fsk_rx.cpp)
+add_executable(lora_gps_tx lora_gps_tx.cpp)
 
 # Find and link the WiringPi library
 find_library(WIRINGPI_LIB wiringPi)
@@ -24,6 +25,7 @@ target_link_libraries(lora_rx ${WIRINGPI_LIB})
 target_link_libraries(lora_tx ${WIRINGPI_LIB})
 target_link_libraries(fsk_tx ${WIRINGPI_LIB})
 target_link_libraries(fsk_rx ${WIRINGPI_LIB})
+target_link_libraries(lora_gps_tx ${WIRINGPI_LIB})
 
 
 # Include all RadioLib source files
@@ -32,3 +34,4 @@ target_sources(lora_rx PRIVATE ${RADIO_LIB_SOURCES})
 target_sources(lora_tx PRIVATE ${RADIO_LIB_SOURCES})
 target_sources(fsk_tx PRIVATE ${RADIO_LIB_SOURCES})
 target_sources(fsk_rx PRIVATE ${RADIO_LIB_SOURCES})
+target_sources(lora_gps_tx PRIVATE ${RADIO_LIB_SOURCES})
