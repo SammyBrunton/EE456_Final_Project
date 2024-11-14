@@ -3,6 +3,7 @@
 #include <sys/socket.h> // For socket functions
 #include <arpa/inet.h> // For inet_pton()
 #include <unistd.h> // For close()
+#include <cstring>
 using namespace std;
 
 // Part 2 : Define Constants and Create a Socket
