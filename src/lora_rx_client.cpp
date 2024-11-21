@@ -99,9 +99,9 @@ struct sockaddr_in serv_addr;
       size_t len = radio.getPacketLength();
       
       // Read the packet
-      int state = radio.readData(buff, len);
-      if (state != RADIOLIB_ERR_NONE) {
-        printf("Read failed, code %d\n", state);
+      int state2 = radio.readData(buff, len);
+      if (state2 != RADIOLIB_ERR_NONE) {
+        printf("Read failed, code %d\n", state2);
       } 
       //else {
       //  printf("Data: %s\n", (char*)buff);
