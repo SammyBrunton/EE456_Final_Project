@@ -113,7 +113,7 @@ struct sockaddr_in serv_addr;
  
  // Part 4 : Send and Receive Data
  //const char *hello = ;
- send(sock, (char*)buff, strlen( len ), 0);
+ send(sock, (char*)buff, len, 0);
  cout << "Received GPS Data Sent to Server." << endl;
  char buffer[1024] = {0};
  read(sock, buffer, 1024);
