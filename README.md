@@ -64,16 +64,21 @@ Ensure your wiring matches the above configuration for proper operation with the
 
 Ensure your wiring matches the above configuration for proper operation with the RPI and SX1262 LORAWAN Pi Hat.  
 
-## Running the Examples  
+## Running the LoRa TX and RX  
 
-1. **Transmit Example**:  
+1. **Transmit Code**:  
 Run the `lora_tx.cpp` example to confirm transmission without errors using:  
 `sudo ./lora_rx`  
 
-2. **Receive Example**:  
+2. **Receive Code**:  
 Run the `lora_rx.cpp` example to confirm initialization without any errors using:  
 `sudo ./lora_rx`  
 Check for errors and verify successful reception.  
+
+The above two scrips will only TX and RX via lora, to transmit and recieve via TCP/IP continue to the next section
+
+## Communicating via TCP/IP
+
 
 ## Additional Resources  
 
