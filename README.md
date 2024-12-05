@@ -75,9 +75,18 @@ Run the `lora_rx.cpp` example to confirm initialization without any errors using
 `sudo ./lora_rx`  
 Check for errors and verify successful reception.  
 
-The above two scrips will only TX and RX via lora, to transmit and recieve via TCP/IP continue to the next section
+The above two scrips will only TX and RX via lora, to transmit and recieve via TCP/IP continue to the next section.
 
 ## Communicating via TCP/IP
+Navigate to the `src` folder and locate the following scripts:
+- `server.cpp`: this script needs to run on the TCP/IP receiving computer. 
+- `client.cpp`: This script needs to run on the device recieving the LoRa data.
+
+### Running the scripts
+To run the scripts an executable must be generated, run `g++ script_name.cpp -0 executable_name`.
+Adjust `script_name` to refelct either of the above scripts names and `executable_name`to the same name as `script_name` however this name does not matter as long as it is tracked.
+To actually execute the scripts run `./executable_name`. 
+
 
 
 ## Additional Resources  
