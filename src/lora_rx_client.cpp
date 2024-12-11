@@ -1,3 +1,4 @@
+// Include Libraries
 #include <iostream>
 #include <RadioLib.h>
 #include "PiHal.h"
@@ -8,8 +9,7 @@
 #include <cstring>
 using namespace std;
 
-#define PORT 54321
-
+#define PORT 54321 // Server port to connect to, make sure it's the same in the Server Code
 
 // Create a new instance of the HAL class
 PiHal* hal = new PiHal(0); // 0 for SPI 0 , set to 1 if using SPI 1(this will change NSS pinout)
@@ -40,7 +40,7 @@ int main(int argc, char** argv) {
   hal->init(); 
   radio.XTAL = true;
 
-  //////
+  // Create a socket for communication
  int sock = socket(AF_INET, SOCK_STREAM, 0);
  if (sock < 0) {
  perror("Socket creation error");
@@ -48,23 +48,24 @@ int main(int argc, char** argv) {
  }
  cout << "Socket created successfully." << endl;
 
-// Part 3 : Define Server Address and Connect
+// Define Server Address Structure & Connect to the Server
 struct sockaddr_in serv_addr;
  serv_addr.sin_family = AF_INET;
- serv_addr.sin_port = htons(PORT);
- // Convert IPv4 address from text to binary
+ serv_addr.sin_port = htons(PORT); // Server Port
+  
+ // Convert IPv4 Server address from text to binary format
  if (inet_pton(AF_INET, "10.40.120.82", &serv_addr.sin_addr) <= 0) {
  perror("Invalid address / Address not supported");
  return -1;
  }
+
+ // Establish the Connection to the Server
  if (connect(sock, (struct sockaddr *)&serv_addr, sizeof(serv_addr)) < 0)
 {perror("Connection failed");
  return -1;
  }
- //cout << "Connected to the server." << endl;
-  //////
 
-  // Initialize the radio module
+  // Initialize the radio module with specific parameters
   printf("[SX1262] Initializing ... ");
   int state = radio.begin(915.0, 125.0, 7, 5, RADIOLIB_SX126X_SYNC_WORD_PRIVATE, 10, 8, 0.0, false);
   if (state != RADIOLIB_ERR_NONE) {
@@ -73,10 +74,10 @@ struct sockaddr_in serv_addr;
   }
   printf("success!\n");
 
-  // Set the ISR for packet received
+  // Set the ISR function for packet reception
   radio.setPacketReceivedAction(setFlag);
 
-  // Start receiving packets
+  // Start listening for incoming packets
   printf("[SX1262] Starting to listen ... ");
   state = radio.startReceive();
   if (state != RADIOLIB_ERR_NONE) {
@@ -85,47 +86,34 @@ struct sockaddr_in serv_addr;
   }
   printf("success!\n");
 
-  // Main loop
+  // Buffer to store received data
   uint8_t buff[256] = { 0 };
- // for(;;) {
+
+  // Main loop to wait for packet reception
   while(!receivedFlag) {
-    ;
+    ; // Do nothing and wait
   }
-   // if(receivedFlag) {
-      // Reset flag
-     // receivedFlag = false;
       
       // Get the length of the received packet
       size_t len = radio.getPacketLength();
       
-      // Read the packet
+      // Read the received data
       int state2 = radio.readData(buff, len);
       if (state2 != RADIOLIB_ERR_NONE) {
         printf("Read failed, code %d\n", state2);
       } 
-      //else {
-      //  printf("Data: %s\n", (char*)buff);
-      //}
-
-
-//////
-
  
- // Part 4 : Send and Receive Data
- //const char *hello = ;
+ // Send the Received Data to the Server
  send(sock, (char*)buff, len, 0);
  cout << "Received GPS Data Sent to Server." << endl;
+
+ // Receive a response from the server
  char buffer[1024] = {0};
  read(sock, buffer, 1024);
  cout << "Message from server: " << buffer << endl;
+
+ // Close the socket connection
  close(sock);
-//////
-  
-
-
-  
-   // }
-  //}
 
   return(0);
 }
