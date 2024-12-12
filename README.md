@@ -7,11 +7,20 @@
 This project utilizes the SX1262 chip and Raspberry Pi to transmit and receive data using LoRa and FSK modulation.
 
 ***********VERY IMPORTANT***********  
-- Enable SPI before attempting to transmit or receive.  
+Before attempting to transmit or receive:
+- Enable SPI   
 Run the following commands:  
 `sudo raspi-config`  
 Navigate to `Interfacing Options` -> `SPI` and enable it.  
-Reboot your Raspberry Pi.  
+Reboot your Raspberry Pi.
+- Ensure WiFi connection   
+Run the following commands:   
+`sudo raspi-config`   
+Navigate to `Boot Options` -> `Wait for Network at Boot` -> enable   
+Next, start the network manager in the command terminal.   
+`sudo nmtui` -> `Activate a connection` -> enter   
+Select the WiFi connection you want and hit enter.   
+Enter the password and press enter to connect.   
 **********************************************************  
 
 ## Installation Instructions  
@@ -95,6 +104,11 @@ To actually execute the scripts run `./executable_name`.
 - Run `picocom -b 9600 /dev/serial0` to stright read the NEMA messages from the GPS module, this can be helpful if there are some issues where the output of the GPS module is uncertain.
 **NOTE:** to exit from picocom hit `ctrl + a` then `ctrl + x`
 
+## Authors
+- Sammy Brunton
+- Colin Lucio
+- Mont Murad
+- Alejandro Cosper
 
 ## Additional Resources  
 
@@ -103,4 +117,5 @@ To actually execute the scripts run `./executable_name`.
 - [WiringPi Pinout](https://pinout.xyz/pinout/wiringpi)  
 - [WiringPi GitHub Repository](https://github.com/WiringPi/WiringPi)  
 - [Waveshare SX1262 LoRaWAN Hat](https://www.waveshare.com/sx1262-lorawan-hat.htm)  
-- [Semtech SX1262 Product Page](https://www.semtech.com/products/wireless-rf/lora-connect/sx1262)  
+- [Semtech SX1262 Product Page](https://www.semtech.com/products/wireless-rf/lora-connect/sx1262)
+- [Connecting RPI to WiFi](https://pimylifeup.com/setting-up-raspberry-pi-wifi/)
