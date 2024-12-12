@@ -91,8 +91,8 @@ Adjust `script_name` to refelct either of the above scripts names and `executabl
 To actually execute the scripts run `./executable_name`. 
 
 ## Helpful Tips
-Since the GPS module outpus stright string NEMA messages, it is possible to simply look at it by reading the terminal. A tool called `picocom` is great for such as task. This tool might not be installed on your device by defult but can be installed via `sudo apt install picocom`
-Run `picocom -b 9600 /dev/serial0` to stright read the NEMA messages from the GPS module, this can be helpful if there are some issues where the output of the GPS module is uncertain.
+- Since the GPS module outpus stright string NEMA messages, it is possible to simply look at it by reading the terminal. A tool called `picocom` is great for such as task. This tool might not be installed on your device by defult but can be installed via `sudo apt install picocom`
+- Run `picocom -b 9600 /dev/serial0` to stright read the NEMA messages from the GPS module, this can be helpful if there are some issues where the output of the GPS module is uncertain.
 **NOTE:** to exit from picocom hit `ctrl + a` then `ctrl + x`
 
 
