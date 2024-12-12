@@ -67,11 +67,11 @@ Ensure your wiring matches the above configuration for proper operation with the
 ## Running the LoRa TX and RX  
 
 1. **Transmit Code**:  
-Run the `lora_tx.cpp` example to confirm transmission without errors using:  
+Run the `lora_gps_tx.cpp` example to confirm transmission without errors using:  
 `sudo ./lora_rx`  
 
 2. **Receive Code**:  
-Run the `lora_rx.cpp` example to confirm initialization without any errors using:  
+Run the `lora_rx_client.cpp` example to confirm initialization without any errors using:  
 `sudo ./lora_rx`  
 Check for errors and verify successful reception.  
 
@@ -79,14 +79,21 @@ The above two scrips will only TX and RX via lora, to transmit and recieve via T
 
 ## Communicating via TCP/IP
 Navigate to the `src` folder and locate the following scripts:
-- `server.cpp`: this script needs to run on the TCP/IP receiving computer. 
-- `client.cpp`: This script needs to run on the device recieving the LoRa data.
+- `server.cpp`: This script needs to run on the TCP/IP receiving computer. 
+- `client.cpp`: This script is integrated with in the Lora_rx and gets executed automatically.
+
+## Configuring the scripts
+The above scripts might need to be configured incase the server's IP address changes. Within the `Lora_rx_client.cpp` line _57_ specifies an IP address as a string, this needs to match the specific server IP address.
 
 ### Running the scripts
-To run the scripts an executable must be generated, run `g++ script_name.cpp -0 executable_name`.
+This step applies to all C++ scripts. To run the scripts an executable must be generated, run `g++ script_name.cpp -0 executable_name`.
 Adjust `script_name` to refelct either of the above scripts names and `executable_name`to the same name as `script_name` however this name does not matter as long as it is tracked.
 To actually execute the scripts run `./executable_name`. 
 
+## Helpful Tips
+Since the GPS module outpus stright string NEMA messages, it is possible to simply look at it by reading the terminal. A tool called `picocom` is great for such as task. This tool might not be installed on your device by defult but can be installed via `sudo apt install picocom`
+Run `picocom -b 9600 /dev/serial0` to stright read the NEMA messages from the GPS module, this can be helpful if there are some issues where the output of the GPS module is uncertain.
+**NOTE:** to exit from picocom hit `ctrl + a` then `ctrl + x`
 
 
 ## Additional Resources  
