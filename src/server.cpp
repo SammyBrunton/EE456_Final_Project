@@ -25,10 +25,6 @@ int main() {
  cout << "Socket created successfully." << endl;
 
  // Continue with rest of the code
-}
-
-
-
 // Declare a sockaddr_in structure to hold the address information
 struct sockaddr_in address;
 // Initialize the address structure to zero
@@ -80,15 +76,16 @@ char buffer[1024] = {0}; // Initialize the buffer to zero
 // Read the message from the client into the buffer
 // The read() function reads up to 1024 bytes from the socket
 read(new_socket, buffer, 1024);
-cout << "Message from client: " << buffer << endl; // Print the received
+cout << "GPS Data from client: " << buffer << endl; // Print the received
 //message
 // Message to send back to the client
-const char *hello = "Hello from server";
+const char *hello = "GPS Data Received";
 // Send the response message to the client
 send(new_socket, hello, strlen(hello), 0);
-cout << "Hello message sent." << endl; // Confirm that the message was sent
+cout << "Transmission Successful." << endl; // Confirm that the message was sent
 // Close the socket for the current connection
 close(new_socket);
 // Close the original server socket
 close(server_fd);
 return 0; // Exit the program successfully
+}
